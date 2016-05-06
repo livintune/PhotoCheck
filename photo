@@ -2,7 +2,7 @@
 # include < time .h >
 extern "C" int init(int d_lev);
 extern "C" int Sleep( int sec , int usec );
-extern "C" int set_motor( int motor , int spieed );
+extern "C" int set_motor( int motor, int dir, int speed );
 extern "C" char get_pixel(int row,int col,int colour);
 extern "C" take_picture();
 int main (){
@@ -33,7 +33,7 @@ int end=i;
 float center=(st+end)/2;
 float err = center-7.5;
 int v_right=15+err;
-int v_lift=15-err;
-set_motor(1,xxx);
+int v_left=15-err;
+set_motor(1, v_left);
 set_motor(2,yyy);
 printf("%d%n",w);

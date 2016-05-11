@@ -15,7 +15,7 @@ int leftMotorSpeed = 0;
 int sum = 0;
 v_right = 100;
 v_left = 100;
-int i;                  // Yet to use this value.
+int i;                  
 int whiteValue;
 int s;                  // Yet to use this value.
 int whiteOrBlack[15];   // White = 1, Black = 0

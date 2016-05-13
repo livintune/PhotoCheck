@@ -20,30 +20,62 @@ int whiteValue;
 int s;                  // Yet to use this value.
 int whiteOrBlack[15];   // White = 1, Black = 0
 
+unsigned long lastTime;
+double pidOutput;
+double errorSum, lastError;
+double kp, ki, kd;
+
 take_picture();
 int open_screen_stream();
 
+//
 for(i = 0, i < 16, i++){
-whiteValue = get_pixel(i*20, 120, 3);
-if(whiteValue > 127){
-whiteOrBlack[i] = 1;
-}
-else{
-whiteOrBlack[i] = 0;
-}
+    whiteValue = get_pixel(i*20, 120, 3);
+    if(whiteValue > 127){
+        whiteOrBlack[i] = 1;
+    }
+    else{
+        whiteOrBlack[i] = 0;
+    }
 }
 
 if( (whiteOrBlack[i]==0) && (whiteOrBlack[i+1]==1) ){
-int startOfWhite = i;
+    int startOfWhite = i;
 }
 
 if( (whiteOrBlack[i] == 1) && (whiteOrBlack[i + 1] == 0) ){ 
-int endOfWhite = i;
+    int endOfWhite = i;
 }
 
 float centerofWhite = (startOfWhite + endOfWhite)/2;
 float errorValue = centerOfWhite - 7.5;
 
+void Compute()
+{
+  unsigned long currentTime = millis;
+  double timeChange = (currentTime-lastTime);
+   
+  //this calculates the integral component
+  errorSum += (errorValue*timeChange);
+  
+  //calculating the derivative component
+  double dError = (errorValue - lastError)/timeChange
+  
+  //computing the PID output
+  pidOutput = kp*error + ki*errorSum + kd*dError;
+  
+  //this bit remembers the variables we just used
+  lastError = errorValue;
+  lastTime = currentTime;
+}
+
+void setConstants(){
+  kp = (INSERT CONSTANT HERE);
+  ki = (INSERT CONSTANT HERE);
+  kd = (INSERT CONSTANT HERE);
+}
+
+//need to change this bit using the PID error
 int rightMotorSpeed = 15 + errorValue;
 int leftMotorSpeed = 15 - errorValue;
 

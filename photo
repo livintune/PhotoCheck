@@ -21,6 +21,7 @@ int s;                  // Yet to use this value.
 int whiteOrBlack[15];   // White = 1, Black = 0
 
 take_picture();
+int open_screen_stream();
 
 for(i = 0, i < 16, i++){
 whiteValue = get_pixel(i*20, 120, 3);

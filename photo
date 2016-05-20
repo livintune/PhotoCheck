@@ -13,8 +13,6 @@ init (1);
 int rightMotorSpeed = 0;
 int leftMotorSpeed = 0;
 int sum = 0;
-v_right = 100;
-v_left = 100;
 int i;                  
 int whiteValue;
 int s;                  // Yet to use this value.
@@ -24,7 +22,7 @@ take_picture();
 int open_screen_stream();
 
 for(i = 0, i < 16, i++){
-whiteValue = get_pixel(i*20, 120, 3);
+whiteValue = get_pixel(i * 20, 120, 3);
 if(whiteValue > 127){
 whiteOrBlack[i] = 1;
 }

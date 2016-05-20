@@ -11,7 +11,7 @@ int main (){
 init (0);
 int whiteValue=0;
 int whiteOrBlack[15];   // White = 1, Black = 0
-while(ture){
+while(true){
 take_picture();
 int open_screen_stream();
 

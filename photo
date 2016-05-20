@@ -40,7 +40,7 @@ int endOfWhite = i;
 }
 
 float centerofWhite = (startOfWhite + endOfWhite)/2;
-
+println("Centre of white" + centerOfWhite + "Start Of white" + startOfWhite + "End of white"+ endOfWhite);
 //If the Robot is centered then the value of center of White should be == 
 
 float errorValue = centerOfWhite - 7.5;
@@ -48,8 +48,8 @@ float errorValue = centerOfWhite - 7.5;
 int rightMotorSpeed = 15 + errorValue;
 int leftMotorSpeed = 15 - errorValue;
 
-set_motor(1, leftMotorSpeed, 50);
-set_motor(2, rightMotorSpeed, 50);
-Sleep(0,5);
+//set_motor(1, leftMotorSpeed, 50);
+//set_motor(2, rightMotorSpeed, 50);
+//Sleep(0,5);
 
-printf("%d%n",w);
+//printf("%d%n",w);

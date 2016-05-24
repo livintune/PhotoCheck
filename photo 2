@@ -9,7 +9,10 @@ extern "C" take_picture();
 
 int main (){
 init (0);
+int rightMotorSpeed = 0;
+int leftMotorSpeed = 0;
 int whiteValue=0;
+int i = 0;
 int whiteOrBlack[15];   // White = 1, Black = 0
 int startOfWhite, endOfWhite;
 float centerOfWhite;

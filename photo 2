@@ -11,8 +11,14 @@ int main (){
 init (0);
 int whiteValue=0;
 int whiteOrBlack[15];   // White = 1, Black = 0
+int startOfWhite, endOfWhite;
+float centerOfWhite;
+
+// While loop will eventually be set up so that it runs until it recognises a Red color value. This will signify it has reached quadrant 4.
 while(true){
+
 take_picture();
+
 int open_screen_stream();
 
 for(int i = 0; i < 16; i++){
@@ -20,10 +26,12 @@ whiteValue = get_pixel(i*20, 120, 3);
 if(whiteValue > 127){
 whiteOrBlack[i] = 1;
 }
+
 else{
 whiteOrBlack[i] = 0;
 }
 }
+
 for(int i=0;i<15;i++){
 if( (whiteOrBlack[i]==0) && (whiteOrBlack[i+1]==1) ){
 int startOfWhite = i;
@@ -34,12 +42,18 @@ int endOfWhite = i;
 }
 }
 float centerofWhite = (startOfWhite + endOfWhite)/2;
+
 float errorValue = centerOfWhite - 7.5;
+
+float d = 0;
 
 float rightMotorSpeed = 15 + errorValue;
 float leftMotorSpeed = 15 - errorValue;
 
 set_motor(1, leftMotorSpeed);
 set_motor(2, rightMotorSpeed);
-printf("%d%n",w);
+Sleep(0,5);
+set_motor(1, 0);
+set_motor(2, 0);
+Sleep(0, 5);
 }

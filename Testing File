@@ -31,8 +31,8 @@ int endOfWhite = i;
 }
 }
 
-printf("%d/n", endOfWhite);
-printf("%d/n", startOfWhite);
+printf("%d/n",endOfWhite);
+printf("%d/n",startOfWhite);
 printf("%d/n",whiteValue);
 
 }

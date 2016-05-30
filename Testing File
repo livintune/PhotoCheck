@@ -8,38 +8,41 @@ extern "C" int set_motor( int motor, int speed );
 extern "C" char get_pixel(int row, int col, int colour);
 extern "C" int take_picture();
 
+
 int whiteValue =0;
 int whiteOrBlack[15];
 int endOfWhite = 0;
 int startOfWhite = 0;
 
 int main (){
-init (0);
-take_picture();
-
-
-for(int i = 0; i < 16; i++){
-whiteValue = get_pixel(i*20, 120, 3);
-
-if(whiteValue > 127){
-whiteOrBlack[i] = 1;
-}
-else{
-whiteOrBlack[i] = 0;
-}
-}
-for(int i=0;i<15;i++){
-if( (whiteOrBlack[i]==0) && (whiteOrBlack[i+1]==1) ){
-int startOfWhite = i;
-}
-
-if( (whiteOrBlack[i] == 1) && (whiteOrBlack[i + 1] == 0) ){
-int endOfWhite = i;
-}
-}
-
-printf("%d/n",endOfWhite);
-printf("%d/n",startOfWhite);
-printf("%d/n",whiteValue);
+    init (0);
+    take_picture();
+    
+    
+    for(int i = 0; i < 16; i++){
+        whiteValue = get_pixel(i*20, 120, 3);
+    
+        if(whiteValue > 127){
+            whiteOrBlack[i] = 1;
+        }
+        
+        else{
+            whiteOrBlack[i] = 0;
+        }
+    }
+    
+    for(int i=0;i<15;i++){
+        if( (whiteOrBlack[i]==0) && (whiteOrBlack[i+1]==1) ){
+            int startOfWhite = i;
+        }
+    
+        if( (whiteOrBlack[i] == 1) && (whiteOrBlack[i + 1] == 0) ){
+            int endOfWhite = i;
+        }
+    }
+    
+    printf("%d/n",endOfWhite);
+    printf("%d/n",startOfWhite);
+    printf("%d/n",whiteValue);
 
 }

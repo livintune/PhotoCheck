@@ -8,80 +8,90 @@ extern "C" char get_pixel(int row, int col, int colour);
 extern "C" take_picture();
 
 int main (){
-init (0);
+    init (0);
+    
+    int rightMotorSpeed = 0;
+    int leftMotorSpeed = 0;
+    int whiteValue=0;
+    int i = 0;
+    int whiteOrBlack[15];   // White = 1, Black = 0
+    int startOfWhite, endOfWhite;
+    float centerOfWhite;
+    
+    boolean reversed = false;
+    boolean redColorRecognised = false;
+    //This turning to true will signify it has reached the start of quadrant 4.
+    
+    //this is the code for when it is following a line
+    while(redColorRecognised == false){
+        startOfWhite = 0;
+        endOfWhite = 0;
+        reversed = false;
+    
+        take_picture();
+    
+        int open_screen_stream();
+    
+        for(int i = 0; i < 16; i++){
+            whiteValue = get_pixel(i*20, 120, 3);
+            
+            if(whiteValue > 127){
+                whiteOrBlack[i] = 1;
+            }
+    
+            else{
+                whiteOrBlack[i] = 0;
+            }
+        }
+    
+        for(int i=0;i<15;i++){
+            if( (whiteOrBlack[i]==0) && (whiteOrBlack[i+1]==1) ){
+                int startOfWhite = i;
+            }
+    
+        if( (whiteOrBlack[i] == 1) && (whiteOrBlack[i + 1] == 0) ){ 
+            int endOfWhite = i;
+        }
+        
+        if(startOfWhite == 0 && endOfWhite == 0){
+            set_motor(1, (-1* leftMotorSpeed) );
+            set_motor(2, (-1* rightMotorSpeed) );
+            Sleep(0, 500000);
+            set_motor(1, 0);
+            set_motor(2, 0);
+            reversed == true;
+        }
+        
+        //method for scanning to see if there are any red pixels should be in here to break the while loop
+        
+        //if it isn't reversing
+        if(reversed == false){
+            float centerofWhite = (startOfWhite + endOfWhite)/2;
+    
+            float errorValue = centerOfWhite - 7.5; // 7.5 is the center, therefore when it is equal the error value will be zero
+            float d = 0; // We need to test this variable as different sizes in order to find a size that corrects/ prevents oscillation.
+    
+            float rightMotorSpeed = 15 + errorValue + d;
+            float leftMotorSpeed = 15 - errorValue + d;
+            set_motor(1, leftMotorSpeed);
+            set_motor(2, rightMotorSpeed);
+            Sleep(0, 500000);
+            set_motor(1, 0);
+            set_motor(2, 0);
+            Sleep(0, 500000);
+        }
+    }
+    
+    
+    
+    //if(startofWhite == && endofwhite ){ // Testing required, we need to test the value of startofwhite and endofwhite at the intersection symbolising the start of quadrant 3
+    //if(){//value inside this statement will be of an intersection.
+    //set_motor(1, )
+    //set_motor(2, );
+    //}
+    //}
+    
+    //what does this mean??
 
-int rightMotorSpeed = 0;
-int leftMotorSpeed = 0;
-int whiteValue=0;
-int i = 0;
-int whiteOrBlack[15];   // White = 1, Black = 0
-int startOfWhite, endOfWhite;
-float centerOfWhite;
-
-boolean reversed = false;
-boolean redColorRecognised = false;
-This turning to true will signify it has reached the start of quadrant 4.
-
-while(redColorRecognised == false){
-
-startOfWhite = 0;
-endOfWhite = 0;
-reversed = false;
-
-take_picture();
-
-int open_screen_stream();
-
-for(int i = 0; i < 16; i++){
-whiteValue = get_pixel(i*20, 120, 3);
-if(whiteValue > 127){
-whiteOrBlack[i] = 1;
-}
-
-else{
-whiteOrBlack[i] = 0;
-}
-}
-
-for(int i=0;i<15;i++){
-if( (whiteOrBlack[i]==0) && (whiteOrBlack[i+1]==1) ){
-int startOfWhite = i;
-}
-
-if( (whiteOrBlack[i] == 1) && (whiteOrBlack[i + 1] == 0) ){ 
-int endOfWhite = i;
-}
-}
-
-if(startOfWhite == 0 && endOfWhite == 0){
-  set_motor(1, (-1* leftMotorSpeed) );
-  set_motor(2, (-1* rightMotorSpeed) );
-  Sleep(0, 500000);
-  set_motor(1, 0);
-  set_motor(2, 0);
-  reversed == true;
-}
-if(startofWhite == && endofwhite ){ // Testing required, we need to test the value of startofwhite and endofwhite at the intersection symbolising the start of quadrant 3
-if(){//value inside this statement will be of an intersection.
-set_motor(1, )
-set_motor(2, );
-}
-}
-
-if(reversed == false){
-float centerofWhite = (startOfWhite + endOfWhite)/2;
-
-float errorValue = centerOfWhite - 7.5; // 7.5 is the center, therefore when it is equal the error value will be zero
-float d = 0; // We need to test this variable as different sizes in order to find a size that corrects/ prevents oscillation.
-
-float rightMotorSpeed = 15 + errorValue + d;
-float leftMotorSpeed = 15 - errorValue + d;
-set_motor(1, leftMotorSpeed);
-set_motor(2, rightMotorSpeed);
-Sleep(0, 500000);
-set_motor(1, 0);
-set_motor(2, 0);
-Sleep(0, 500000);
-}
 
 }
